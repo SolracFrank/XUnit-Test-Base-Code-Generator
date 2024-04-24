@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./public/Tlog.svg" type="image/svg+xml" />
+    <title>XUnit Test Generator for CQRS</title>
+    <link rel="stylesheet" href="./src/normalized.css" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+
+  <body>
+    <div class="cont h-screen">
+      <h3 class="title">Test Formatter</h3>
+      <h5 class="title">XUnit + CQRS</h5>
+
+      <div class="card cont">
+        <h5 class="section-title">Basic configuration</h5>
+        <label for="testSelect">Expected</label>
+        <select name="testType" id="testSelect">
+          <option value="Correct">Correct</option>
+          <option value="Incorrect">Incorrect</option>
+        </select>
+
+        <input
+          id="value"
+          type="text"
+          placeholder="Title of the class to test"
+        />
+
+        <div>
+          <label>Format entire class</label>
+          <input id="classMode" type="checkbox" />
+        </div>
+      </div>
+
+      <div class="class-builder cont card">
+        <h5 class="section-title">Class configuration</h5>
+
+        <div class="">
+          <button id="commonServices" class="btn-services">
+            Common Services
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              width="16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div id="add-services" class="w-f relative">
+          <input
+            id="services"
+            type="text"
+            placeholder="Services separated by comma"
+          />
+          <button id="clear-services" class="absolute btn-flat">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="16"
+              class="ex"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="check-options">
+          <div>
+            <label for="using">Common using libraries</label>
+            <input id="using" type="checkbox" />
+          </div>
+          <div>
+            <label for="request">Initialize request</label>
+            <input id="request" type="checkbox" />
+          </div>
+        </div>
+      </div>
+
+      <button id="convert" class="btn btn-primary">Generate Test Code</button>
+      <textarea id="result" readonly></textarea>
+      <button id="copy" data-text="Copy Code" class="btn btn-secondary">
+        Copy code
+      </button>
+
+      <button id="show-config" class="show-config">
+        <span>Show configuration</span>
+        <input id="showing" style="display: none" />
+      </button>
+
+      <div id="configuration" class="cont card mb">
+        <h5 class="section-title">
+          Persistance configuration for code generator
+        </h5>
+
+        <input
+          id="defaultServices"
+          type="text"
+          placeholder="Set common services separated by comma. ex) unitOfWork, logger<>"
+        />
+        <input
+          id="defaultUsing"
+          type="text"
+          placeholder="Set common using separated by comma. ex) Domain.Entities, XUnit, etc."
+        />
+        <h5 class="section-title">Configuration Preview</h5>
+        <div class="grid w-full">
+          <span class="span-half ml-n bold">Current services</span>
+          <span class="span-half ml-n bold">Current using</span>
+        </div>
+        <div class="preview">
+          <textarea
+            name=""
+            id="commonServicesResult"
+            cols="30"
+            rows="10"
+            readonly
+          ></textarea>
+          <textarea
+            name=""
+            id="commonUsingResult"
+            cols="30"
+            rows="10"
+            readonly
+          ></textarea>
+        </div>
+        <div class="button-display">
+          <button
+            id="save-conf"
+            data-text="Save configuration"
+            class="btn btn-secondary"
+          >
+            Save configuration
+          </button>
+          <button
+            id="delete-conf"
+            data-text="Delete configuration"
+            class="btn btn-delete"
+          >
+            Delete configuration
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="module" src="./src/main.ts"></script>
+</html>
